@@ -8,22 +8,6 @@ import static org.junit.Assert.*;
 
 public class PrimeNumberCalculatorTest
 {
-
-
-    /*
-     - learning -> minimal Set of Test if possible
-        -> Type of test -> exploratorive Test
-     - Strategies -> fake it
-
-     */
-
-    /*
-    TestCases
-     -Take Start Number and End Number and return number up to end number
-     -return prime Number
-     -returns prime Number ordered
-     */
-
     private PrimeNumberCalculator testee = new PrimeNumberCalculator();
 
     @Test
@@ -36,18 +20,25 @@ public class PrimeNumberCalculatorTest
     @Test
     public void calculatePrime_returnListOfNumbersBetweenParams(){
         List<Integer> integers = testee.calculatePrime(1, 10);
-        assertTrue(integers.size()> 2);
+        assertTrue(integers.size()> 1);
+        assertTrue(integers.size()< 10);
     }
 
     @Test
-    public void calculatePrime_first_primeNumber(){
-        List<Integer> listOfPrimes = testee.calculatePrime(0,5);
-        assertEquals(Integer.valueOf(2),listOfPrimes.get(0));
+    public void calculatePrime_noNegativeStart(){
+        List<Integer> calculatePrime = testee.calculatePrime(-1, 10);
+        assertTrue(calculatePrime.isEmpty());
     }
 
     @Test
-    public void calculatePrime_OrderOfFirstThreePrimes(){
-        List<Integer> integers = testee.calculatePrime(0, 10);
+    public void calculatePrime_StartBiggerThenEnd(){
+        List<Integer> calculatePrime = testee.calculatePrime(100, 10);
+        assertTrue(calculatePrime.isEmpty());
+    }
+
+    @Test
+    public void calculatePrime_OrderOfFirstPrimes(){
+        List<Integer> integers = testee.calculatePrime(1, 10);
         assertEquals(Integer.valueOf(2), integers.get(0));
         assertEquals(Integer.valueOf(3), integers.get(1));
         assertEquals(Integer.valueOf(5), integers.get(2));
