@@ -2,6 +2,7 @@ package de.test.app;
 
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.AggregateWith;
@@ -60,6 +61,7 @@ public class PrimeNumberCalculatorTest {
     }
 
     // Example of Method Source parameterized Test
+
     @ParameterizedTest
     @MethodSource
     public void calculatePrime_ParameterizedTests_staticMethodSource(int start, int end, List<Integer> solution) {
@@ -67,7 +69,7 @@ public class PrimeNumberCalculatorTest {
         assertTrue(integers.containsAll(solution));
     }
 
-    public static Stream<Arguments> calculatePrime_ParameterizedTests() {
+    public static Stream<Arguments> calculatePrime_ParameterizedTests_staticMethodSource() {
         return Stream.of(Arguments.arguments(1, 10, Arrays.asList(2, 3, 5, 7)),
                          Arguments.arguments(4, 10, Arrays.asList(5, 7)),
                          Arguments.arguments(10, 20, Arrays.asList(11, 13, 17, 19)));
