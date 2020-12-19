@@ -10,7 +10,7 @@ public class PrimeNumberCalculator {
     public List<Integer> calculatePrime(int start, int end) {
 
         if (start < 1 || start > end) {
-            return Collections.emptyList();
+            throw new IllegalArgumentException("start needs to be >=1 and end > start");
         }
 
         List<Integer> primeNumbers = new ArrayList<>();

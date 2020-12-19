@@ -3,6 +3,7 @@ package de.test.app;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.AggregateWith;
@@ -11,8 +12,7 @@ import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.platform.commons.util.StringUtils;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class PrimeNumberCalculatorTest {
+    public static final String EXPECTED_EXCEPTION_MESSAGE = "start needs to be >=1 and end > start";
     private PrimeNumberCalculator testee = new PrimeNumberCalculator();
 
     @Test
@@ -39,14 +40,15 @@ public class PrimeNumberCalculatorTest {
 
     @Test
     public void calculatePrime_noNegativeStart() {
-        List<Integer> calculatePrime = testee.calculatePrime(-1, 10);
-        assertTrue(calculatePrime.isEmpty());
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> testee.calculatePrime(-1, 10));
+        assertEquals(illegalArgumentException.getMessage(), EXPECTED_EXCEPTION_MESSAGE);
+
     }
 
     @Test
     public void calculatePrime_StartBiggerThenEnd() {
-        List<Integer> calculatePrime = testee.calculatePrime(100, 10);
-        assertTrue(calculatePrime.isEmpty());
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> testee.calculatePrime(100, 10));
+        assertEquals(illegalArgumentException.getMessage(), EXPECTED_EXCEPTION_MESSAGE);
     }
 
     @Test
@@ -62,6 +64,7 @@ public class PrimeNumberCalculatorTest {
 
     // Example of Method Source parameterized Test
 
+    @Tag("parameterized")
     @ParameterizedTest
     @MethodSource
     public void calculatePrime_ParameterizedTests_staticMethodSource(int start, int end, List<Integer> solution) {
@@ -75,6 +78,7 @@ public class PrimeNumberCalculatorTest {
                          Arguments.arguments(10, 20, Arrays.asList(11, 13, 17, 19)));
     }
 
+    @Tag("parameterized")
     @ParameterizedTest
     @CsvFileSource(resources = "/primeNumberStarterArguments.csv")
     public void calculatePrime_ParameterizedTests_CsvFileWithConverter(int start, int end,
@@ -83,6 +87,7 @@ public class PrimeNumberCalculatorTest {
         assertTrue(integers.containsAll(solution));
     }
 
+    @Tag("parameterized")
     @DisplayName("Automated Parameterized Prime Number Test")
     @ParameterizedTest(name = "{index} Test with start {0} and end {1} and the solution {2}")
     @CsvFileSource(resources = "/primeNumberStarterArguments.csv")
