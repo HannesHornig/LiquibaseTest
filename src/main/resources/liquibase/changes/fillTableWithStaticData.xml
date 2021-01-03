@@ -7,8 +7,7 @@
     <changeSet author="Dev1" id="2">
         <loadData
                 encoding="UTF-8"
-                file="staticdata/primesToTen.csv"
-                relativeToChangelogFile="true"
+                file="src/main/resources/liquibase/staticdata/primesToTen.csv"
                 schemaName="primetest"
                 separator=";"
                 tableName="primenumbers"/>
