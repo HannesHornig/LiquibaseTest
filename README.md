@@ -11,8 +11,8 @@ Used for testings different test-methods on a (more or less) minimal example. Cu
 
 ## Things still to test
 
-* Bulding a docker image with a pre-filled database (here MySql) in the build build-process. The structure should come from liquibase so 
-  that I can use the same tool that gets executed while deploying is used to build the test-docker-images.
+* Building a docker image with a pre-filled database (here MySql) in the build build-process. The structure should come from liquibase so 
+  that I can use the same tool that gets executed while deploying.
 * Performance Testing (J-Meter, Gatling ...) 
 * Integration Testing with Spring Boot
 * Using Tools (Postman, SoapUi ...) to mock external API-Calls. Probably going to spin-up multiple Docker container for that.
